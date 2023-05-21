@@ -27,9 +27,6 @@ export default function Beranda() {
     if(edit){ /*supaya saat disubmit atau diedit, tombolnya jadi "Add" dan ada opsi "Edit" lagi*/
       setEdit(false)
     }
-    /* if(done) {
-      setDone(false)
-    } */
   };
 
   const handleEdit = (id) => { /*pembedanya berdasarkan id, jadi id untuk nentuin id mana yang mau diedit*/
@@ -54,10 +51,10 @@ export default function Beranda() {
         })
       );
     };
-  
-  const handleDelete = () => {
-    setTodos(todos.filter((todo) => todo.id = id)) /*filter untuk hanya menampilkan data yang idnya ga sama dengan id yang mau dihapus*/
-  }
+
+  const handleDelete = (id) => {
+    setTodos(todos.filter((todo) => todo.id != id)) /*filter untuk hanya menampilkan data yang idnya ga sama dengan id yang mau dihapus*/
+  } 
 
   const handleDeleteAll = () => {
     setTodos([]) /*hapus semua array, karena delete all bakal menghapus semua data*/
@@ -110,9 +107,8 @@ export default function Beranda() {
           </div> 
           <div className="flex flex-row items-start justify-start gap-[10px]">
             {edit ? "" : <Button type="Edit" onClick={()=> handleEdit(todo.id)}/>}
-            <Button type="Delete" onClick={()=> handleDelete(todo.id)}/>        
-            <Button type={todo.done ? "Done" : "Done?"} onClick={()=> handleDone(todo.id)}/>
-            
+            <Button type="Delete" onClick={()=> handleDelete(todo.id)}/>                
+            <Button type={todo.done ? "Done" : "Done?"} onClick={()=> handleDone(todo.id)}/> {/*kalau todo.done true, maka tombolnya jadi "Done", kalau false, tombolnya jadi "Done?"*/}          
           </div>
         </div>
         ))}
