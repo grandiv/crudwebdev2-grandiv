@@ -7,8 +7,7 @@ export default function Beranda() {
   const [todos, setTodos] = useState([]); /*pakai array karena bakal nyimpen leih dari satu value*/
   const [edit, setEdit] = useState(false); /*false supaya tombol defaultnya "Add"*/
   const [deadline, setDeadline] = useState("");
-  const [done, setDone] = useState(false);
-
+  
 
   const handleSubmit = (e) => {
     e.preventDefault(); /*biar ga refresh*/
@@ -19,17 +18,18 @@ export default function Beranda() {
     } //kalau judul dan deskripsi kosong, bakal muncul alert
 
     // id todos berdasarkan waktu submit (time stamp)
-    setTodos([...todos, {id: Date.now(), title, desc, deadline}]) /*ketika submit, akan memanggil fungsi handleSubmit, bakal ngeset todos menjadi todo2 yang sudah ada + todo yang baru yang terdiri atas id utk spesifikasi, title, dan desc*/
+    setTodos([...todos, {id: Date.now(), title, desc, deadline, done: false}]) /*ketika submit, akan memanggil fungsi handleSubmit, bakal ngeset todos menjadi todo2 yang sudah ada + todo yang baru yang terdiri atas id utk spesifikasi, title, dan desc*/
     setTitle(""); /*setelah submit supaya kosong*/
     setDesc(""); /*setelah submit supaya kosong*/
     setDeadline(""); /*setelah submit supaya kosong*/
+    
 
     if(edit){ /*supaya saat disubmit atau diedit, tombolnya jadi "Add" dan ada opsi "Edit" lagi*/
       setEdit(false)
     }
-    if(done) {
+    /* if(done) {
       setDone(false)
-    }
+    } */
   };
 
   const handleEdit = (id) => { /*pembedanya berdasarkan id, jadi id untuk nentuin id mana yang mau diedit*/
@@ -45,13 +45,17 @@ export default function Beranda() {
   }
 
   const handleDone = (id) => {
-    todos.map((todo) => {
-      if (todo.id == id) {
-        setDone(true)  /*saat tombol "Done?" diklik, maka tombolnya berubah jadi "Done"*/
-      }
-    })
-  }  
-  const handleDelete = (id) => {
+      setTodos(
+        todos.map((todo) => {
+          if(todo.id == id) {
+            return {...todo, done: !todo.done};
+          }
+          return todo;
+        })
+      );
+    };
+  
+  const handleDelete = () => {
     setTodos(todos.filter((todo) => todo.id = id)) /*filter untuk hanya menampilkan data yang idnya ga sama dengan id yang mau dihapus*/
   }
 
@@ -103,11 +107,12 @@ export default function Beranda() {
             <h1 className="text-[20px]">{todo.title}</h1> {/*todo karena mappingnya namanya todo*/}
             <h1 className="text-[16px]">{todo.desc}</h1>
             <h1 className="text-[20px] text-red-600">{todo.deadline}</h1>
-          </div>
+          </div> 
           <div className="flex flex-row items-start justify-start gap-[10px]">
             {edit ? "" : <Button type="Edit" onClick={()=> handleEdit(todo.id)}/>}
-            <Button type="Delete" onClick={()=> handleDelete(todo.id)}/>
-            <Button type={done ? "Done" : "Done?"} onClick={()=> handleDone(todo.id)}/>
+            <Button type="Delete" onClick={()=> handleDelete(todo.id)}/>        
+            <Button type={todo.done ? "Done" : "Done?"} onClick={()=> handleDone(todo.id)}/>
+            
           </div>
         </div>
         ))}
