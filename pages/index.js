@@ -66,44 +66,44 @@ export default function Beranda() {
         <title>To-Do App | Grandiv</title>
       </head>
 
-      <div className="flex flex-col items-center justify-center m-[30px]">
-        <h1 className="text-[30px] text-center font-bold">To Dos dan Tugas</h1>
-        <form onSubmit = {handleSubmit} className="flex flex-col items-start justify-center gap-[14px] mt-[15px]"> {/*pake form biar yg di dalam form bisa disubmit*/}
-          <div className="flex flex-row items-start justify-center gap-[47px]">
-            <h4 className="text-[20px]">Judul</h4>
-            <input type="text" className="ring-[2px] ring-inset ring-cyan-500 p-[5px] rounded-lg ml-[33px]"
+      <div className="flex flex-col items-center justify-center bg-gradient-to-r from-sky-900 via-sky-800 to-sky-900">
+        <h1 className="text-[30px] text-center font-bold text-sky-900 w-[500px] bg-gradient-to-r from-sky-500 via-teal-150 to-sky-500 rounded-xl" >To Dos dan Tugas</h1>
+        <form onSubmit = {handleSubmit} className="flex flex-col text-center mb-5 w-[500px] items-start justify-center grid justify-items-stretch bg-cover bg-gradient-to-r from-sky-500 via-sky-400 to-sky-500 rounded-xl gap-[14px] mt-[15px]"> {/*pake form biar yg di dalam form bisa disubmit*/}
+          <div className="flex flex-row items-start justify-center gap-[97px]">
+            <h4 className="text-[20px] my-3 text-sky-900 font-bold">Judul</h4>
+            <input type="text" className="ring-[2px] ring-inset ring-cyan-500 p-[5px] rounded-lg ml-[33px] my-3"
               onChange={(e) => {setTitle(e.target.value)}} 
               value = {title} //saat kita menulis sesuatu maka itu akan masuk ke state title //supaya setelah disubmit value nya jadi kosong
               id = "title"
             />
           </div>
-          <div className="flex flex-row items-start justify-center gap-[14px]">
-            <h4 className="text-[20px]">Deskripsi</h4>
-            <input type="text" className="ring-[2px] ring-inset ring-cyan-500 p-[5px] rounded-lg ml-[33px]"
+          <div className="flex flex-row items-start justify-center gap-[62px]">
+            <h4 className="text-[20px] my-2 text-sky-900 font-bold">Deskripsi</h4>
+            <input type="text" className="ring-[2px] ring-inset ring-cyan-500 p-[5px] rounded-lg ml-[33px] my-2"
             onChange = {(e) => {setDesc(e.target.value)}}
             value = {desc} //saat kita menulis sesuatu maka itu akan masuk ke state desc //supaya setelah disubmit value nya jadi kosong
             id = "desc"
             />
           </div>
-          <div className="flex flex-row items-start justify-center gap-[14px]">
-            <h4 className="text-[20px]">Deadline</h4>
-            <input type="text" className="ring-[2px] ring-inset ring-cyan-500 p-[5px] rounded-lg ml-[33px]"
+          <div className="flex flex-row items-start justify-center gap-[64px]">
+            <h4 className="text-[20px] my-2 text-sky-900 font-bold">Deadline</h4>
+            <input type="text" className="ring-[2px] ring-inset ring-cyan-500 p-[5px] rounded-lg ml-[33px] my-2"
             onChange = {(e) => {setDeadline(e.target.value)}}
             value = {deadline}
             id = "deadline"
             />
           </div>
-          <Button type={edit ? "Edit":"Add"} className="mx-auto mt-[2px]"/> {/*Nambah classname mx-auto dan mt dari clsx*/} {/*boolean edit supaya saat ngedit tombolnya "Edit" bukan "Add"*/}
+          <Button type={edit ? "Edit":"Add"} className="mx-auto mt-[2px] my-3"/> {/*Nambah classname mx-auto dan mt dari clsx*/} {/*boolean edit supaya saat ngedit tombolnya "Edit" bukan "Add"*/}
         </form>
 
         {/* Ini untuk nampilin hasil submit */}
         {/* pakai mapping karena hasil submitnya lebih dari satu, perlua multiple cards */}
         {todos.map((todo) => (
-        <div key={todo.id} className="flex flex-row items-start justify-between w-[500px] bg-slate-300 rounded-xl py-[10px] px-[20px] mt-[15px]">
+        <div key={todo.id} className="flex flex-row items-start justify-between w-[500px] mb-3 bg-sky-300 rounded-xl py-[10px] px-[20px] mt-[15px]">
           <div className="flex flex-col items-start justify-start">
             <h1 className="text-[20px]">{todo.title}</h1> {/*todo karena mappingnya namanya todo*/}
             <h1 className="text-[16px]">{todo.desc}</h1>
-            <h1 className="text-[20px] text-red-600">{todo.deadline}</h1>
+            <h1 className="text-[20px] text-sky-900 font-bold">{todo.deadline}</h1>
           </div> 
           <div className="flex flex-row items-start justify-start gap-[10px]">
             {edit ? "" : <Button type="Edit" onClick={()=> handleEdit(todo.id)}/>}
@@ -112,7 +112,7 @@ export default function Beranda() {
           </div>
         </div>
         ))}
-        {todos.length == 0 ? "" : <Button type="Delete All" onClick={()=> handleDeleteAll()}/>} {/*kalau todosnya kosong (artinya arraynya 0), maka tombol delete all ga muncul, kalau ada isinya, tombol delete all muncul*/}
+        {todos.length == 0 ? "" : <Button type="Delete All" className="mx-auto mt-[2px] mb-3" onClick={()=> handleDeleteAll()}/>} {/*kalau todosnya kosong (artinya arraynya 0), maka tombol delete all ga muncul, kalau ada isinya, tombol delete all muncul*/}
       </div>
     </>
   )

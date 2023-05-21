@@ -6,7 +6,7 @@ import clsx from 'clsx';
 export default function Button({type="Add", className, onClick = () => {}}){ // Kasih parameter className supaya bisa ngasih className lain selain yang ada di fungsi btnType
     const btnType = (type) => {
         if (type == "Add")
-            return "bg-blue-400 rounded-lg transition-all ease-in-out duration-300 hover:bg-blue-500 active:bg-blue-600 px-[14px] py-[5px]";
+            return "bg-sky-600 rounded-lg transition-all ease-in-out duration-300 hover:bg-sky-700 active:bg-sky-800 px-[14px] py-[5px]";
         if (type == "Edit")
             return "bg-yellow-400 rounded-lg transition-all ease-in-out duration-300 hover:bg-yellow-500 active:bg-yellow-600 px-[14px] py-[5px]";
         if (type == "Done?")
